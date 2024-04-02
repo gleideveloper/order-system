@@ -1,0 +1,15 @@
+package com.gleidev.orders.config;
+
+import com.gleidev.orders.adapters.outbound.SaveOrderAdapter;
+import com.gleidev.orders.application.core.usecase.SaveOrderUseCase;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class SaveOrderConfig {
+
+    @Bean
+    public SaveOrderUseCase saveOrderUseCase(SaveOrderAdapter saveOrderAdapter){
+        return new SaveOrderUseCase(saveOrderAdapter);
+    }
+}
