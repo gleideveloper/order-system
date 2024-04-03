@@ -1,6 +1,5 @@
 package com.gleidev.orders.application.ports.out;
 
-import com.gleidev.orders.application.core.domain.Customer;
 import com.gleidev.orders.application.core.domain.Order;
 
 import java.util.Optional;

@@ -10,12 +10,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class SaveOrderStatusConsumer {
 
+//    @Autowired
+//    private UpdateCustomerUseCasePort updateCustomerUseCasePort;
     @Autowired
     private OrderMessageMapper orderMessageMapper;
 
 //    @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
     public void receive(OrderMessage orderMessage) {
         var order = orderMessageMapper.toOrder(orderMessage);
+//        updateCustomerUseCasePort.update(customer, customerMessage.getZipCode());
         System.out.println(order);
     }
 
