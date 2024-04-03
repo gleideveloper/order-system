@@ -1,5 +1,6 @@
 package com.gleidev.orders.config;
 
+import com.gleidev.orders.application.core.domain.Order;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +24,20 @@ public class KafkaProducerConfig {
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configProps.put(GROUP_ID_CONFIG, "gleidev");
+        configProps.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps);
+    }
+    @Bean
+    public KafkaTemplate<String, Order> kafkaTemplateForOrder() {
+        return new KafkaTemplate<>(producerFactoryForOrder());
+    }
+
+    @Bean
+    public ProducerFactory<String, Order> producerFactoryForOrder() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(GROUP_ID_CONFIG, "gleidev");
