@@ -7,7 +7,7 @@ import com.gleidev.orders.application.ports.out.SendOrderStatusPort;
 
 public class SaveOrderUseCase implements SaveOrderUseCasePort {
 
-    private final String ORDER_MESSAGE = "novo pedido foi efetuado";
+    private final String ORDER_MESSAGE = "novo pedido foi efetuado!!!";
     private final SaveOrderPort saveOrderPort;
 
     private SendOrderStatusPort sendOrderStatusPort;

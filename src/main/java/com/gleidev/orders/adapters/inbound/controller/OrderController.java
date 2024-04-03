@@ -44,11 +44,10 @@ public class OrderController {
         return ResponseEntity.ok().body(orderResponse);
     }
     @GetMapping("change-status/{id}")
-    public ResponseEntity<OrderResponse> findByIdChangeStatus(@PathVariable final String id) {
+    public ResponseEntity<String> findByIdChangeStatus(@PathVariable final String id) {
         var orderMessage = findOrderByIdUseCasePort.find(id);
         sendOrderStatusPort.send(orderMessage);
-        var orderResponse = orderMapper.toOrderResponse(orderMessage);
-        return ResponseEntity.ok().body(orderResponse);
+        return ResponseEntity.ok().body("Status da ordem alterado com sucesso!!!");
     }
 
     @PutMapping("/{id}")
