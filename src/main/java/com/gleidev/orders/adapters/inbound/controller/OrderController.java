@@ -39,6 +39,8 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderResponse> findById(@PathVariable final String id) {
+        var orderMessage = findOrderByIdUseCasePort.find(id);
+        sendOrderStatusPort.send(orderMessage);
         var order = findOrderByIdUseCasePort.find(id);
         var orderResponse = orderMapper.toOrderResponse(order);
         return ResponseEntity.ok().body(orderResponse);

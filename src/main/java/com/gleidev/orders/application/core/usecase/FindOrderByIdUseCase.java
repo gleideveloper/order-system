@@ -3,10 +3,14 @@ package com.gleidev.orders.application.core.usecase;
 import com.gleidev.orders.application.core.domain.Order;
 import com.gleidev.orders.application.ports.in.FindOrderByIdUseCasePort;
 import com.gleidev.orders.application.ports.out.FindOrderByIdPort;
+import com.gleidev.orders.application.ports.out.SendOrderStatusPort;
+
+import java.util.Optional;
 
 public class FindOrderByIdUseCase implements FindOrderByIdUseCasePort {
 
     private final FindOrderByIdPort findOrderByIdPort;
+
 
     public FindOrderByIdUseCase(FindOrderByIdPort findOrderByIdPort) {
         this.findOrderByIdPort = findOrderByIdPort;
