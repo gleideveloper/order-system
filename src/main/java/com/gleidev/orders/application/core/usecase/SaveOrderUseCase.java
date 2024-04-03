@@ -19,6 +19,7 @@ public class SaveOrderUseCase implements SaveOrderUseCasePort {
 
     @Override
     public void save(Order order) {
+        order.setOrderMessage(ORDER_MESSAGE);
         saveOrderPort.save(order);
         sendOrderStatusPort.send(order);
     }

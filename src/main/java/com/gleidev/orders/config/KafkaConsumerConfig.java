@@ -1,6 +1,5 @@
 package com.gleidev.orders.config;
 
-import com.gleidev.orders.adapters.inbound.consumer.message.OrderMessage;
 import com.gleidev.orders.application.core.domain.Order;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.context.annotation.Bean;

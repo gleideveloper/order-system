@@ -18,7 +18,7 @@ public class SaveOrderStatusConsumer {
     @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
     public void receive(Order order) {
 //        updateCustomerUseCasePort.update(customer, customerMessage.getZipCode());
-        System.out.println(order.getStatus());
+        System.out.println(order.getOrderMessage());
     }
 
 }
