@@ -48,4 +48,12 @@ public class Order {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                ", status='" + status + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
