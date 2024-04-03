@@ -10,19 +10,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SaveOrderStatusConsumer {
-    Logger logger = LoggerFactory.getLogger(SaveOrderStatusConsumer.class);
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SaveOrderStatusConsumer.class);
+    private static final String ORDER_STATUS = "ENVIADO_TRANSPORTADORA";
+
     @Autowired
     private UpdateOrderUseCasePort updateOrderUseCasePort;
 
     @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
     public void receive(Order order) {
         if (order.getOrderMessage() != null) {
-            logger.info("Save {}", order);
-            logger.info("Order Message:: {}", order.getOrderMessage());
+            LOGGER.info("Save {}", order);
+            LOGGER.info("Order Message:: {}", order.getOrderMessage());
         }
         if (order.getId() != null){
-            logger.info("Description {}", order);
-            order.setStatus("ENVIADO_TRANSPORTADORA");
+            LOGGER.info("Description {}", order);
+            order.setStatus(ORDER_STATUS);
             updateOrderUseCasePort.update(order);
         }
     }
