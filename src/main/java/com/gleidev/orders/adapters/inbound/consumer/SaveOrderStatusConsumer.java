@@ -15,11 +15,10 @@ public class SaveOrderStatusConsumer {
     @Autowired
     private OrderMessageMapper orderMessageMapper;
 
-//    @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
-    public void receive(OrderMessage orderMessage) {
-        var order = orderMessageMapper.toOrder(orderMessage);
+    @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
+    public void receive(Order order) {
 //        updateCustomerUseCasePort.update(customer, customerMessage.getZipCode());
-        System.out.println(order);
+        System.out.println(order.getStatus());
     }
 
 }

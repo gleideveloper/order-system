@@ -34,7 +34,6 @@ public class OrderController {
     public ResponseEntity<Void> save(@Valid @RequestBody OrderRequest orderRequest) {
         var order = orderMapper.toOrder(orderRequest);
         saveOrderUseCasePort.save(order);
-        sendOrderStatusPort.send(order);
         return ResponseEntity.ok().build();
     }
 

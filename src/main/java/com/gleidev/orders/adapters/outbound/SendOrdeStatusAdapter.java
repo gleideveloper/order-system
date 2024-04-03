@@ -1,5 +1,6 @@
 package com.gleidev.orders.adapters.outbound;
 
+import com.gleidev.orders.adapters.inbound.consumer.message.OrderMessage;
 import com.gleidev.orders.application.core.domain.Order;
 import com.gleidev.orders.application.ports.out.SendOrderStatusPort;
 import org.springframework.beans.factory.annotation.Autowired;

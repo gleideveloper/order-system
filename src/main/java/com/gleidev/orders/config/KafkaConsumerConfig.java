@@ -19,22 +19,24 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 @Configuration
 public class KafkaConsumerConfig {
 
-    @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, OrderMessage> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, OrderMessage> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory());
-        return factory;
-    }
 
     @Bean
-    public ConsumerFactory<String, OrderMessage> consumerFactory() {
+    public ConsumerFactory<String, Order> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(GROUP_ID_CONFIG, "gleidev");
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
-        props.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
-        return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(OrderMessage.class));
+        props.put(JsonDeserializer.TRUSTED_PACKAGES, "*");
+//        props.put(AUTO_OFFSET_RESET_CONFIG, "earliest");
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String, Order> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, Order> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(consumerFactory());
+        return factory;
     }
 
 }

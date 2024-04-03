@@ -18,19 +18,19 @@ import static org.apache.kafka.clients.producer.ProducerConfig.*;
 @Configuration
 public class KafkaProducerConfig {
 
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
-    }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, Order> producerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         configProps.put(GROUP_ID_CONFIG, "gleidev");
         configProps.put(KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         return new DefaultKafkaProducerFactory<>(configProps);
+    }
+    @Bean
+    public KafkaTemplate<String, Order> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
 
 }

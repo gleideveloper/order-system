@@ -12,6 +12,5 @@ public class OrderMessage {
     private String id;
     private String status;
     private String description;
-    private String orderMessage;
 
 }

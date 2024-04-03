@@ -8,5 +8,6 @@ import org.mapstruct.Mapper;
 public interface OrderMessageMapper {
 
     Order toOrder(OrderMessage orderMessage);
+    OrderMessage toMessage(Order order);
 
 }
