@@ -16,11 +16,12 @@ public class SaveOrderStatusConsumer {
 
     @KafkaListener(topics = "tp-order-status", groupId = "gleidev")
     public void receive(Order order) {
-        logger.info("Description {}", order);
         if (order.getOrderMessage() != null) {
+            logger.info("Save {}", order);
             logger.info("Order Message:: {}", order.getOrderMessage());
         }
         if (order.getId() != null){
+            logger.info("Description {}", order);
             order.setStatus("ENVIADO_TRANSPORTADORA");
             updateOrderUseCasePort.update(order);
         }
