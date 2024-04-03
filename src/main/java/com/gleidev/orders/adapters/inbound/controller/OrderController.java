@@ -1,13 +1,12 @@
 package com.gleidev.orders.adapters.inbound.controller;
 
 import com.gleidev.orders.adapters.inbound.controller.mapper.OrderMapper;
-import com.gleidev.orders.adapters.inbound.controller.request.CustomerRequest;
 import com.gleidev.orders.adapters.inbound.controller.request.OrderRequest;
 import com.gleidev.orders.adapters.inbound.controller.response.OrderResponse;
-import com.gleidev.orders.application.core.domain.Customer;
 import com.gleidev.orders.application.ports.in.FindOrderByIdUseCasePort;
 import com.gleidev.orders.application.ports.in.SaveOrderUseCasePort;
 import com.gleidev.orders.application.ports.in.UpdateOrderUseCasePort;
+import com.gleidev.orders.application.ports.out.SendOrderStatusPort;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +24,9 @@ public class OrderController {
 
     @Autowired
     private UpdateOrderUseCasePort updateOrderUseCasePort;
+
+    @Autowired
+    private SendOrderStatusPort sendOrderStatusPort;
     @Autowired
     private OrderMapper orderMapper;
 
@@ -32,6 +34,7 @@ public class OrderController {
     public ResponseEntity<Void> save(@Valid @RequestBody OrderRequest orderRequest) {
         var order = orderMapper.toOrder(orderRequest);
         saveOrderUseCasePort.save(order);
+        sendOrderStatusPort.send(order);
         return ResponseEntity.ok().build();
     }
 
